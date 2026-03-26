@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "41dfb859-8f58-4066-8d42-5ad3177f0819",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "核医疗资料搜集日报",
+      "enabled": true,
+      "createdAtMs": 1773303969627,
+      "updatedAtMs": 1774490601309,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "请执行核医疗/核医药/核素相关资料搜集任务：\n1. 搜索关键词：核医疗、核医药、核素\n2. 整理内容：相关政策、市场研发动态、临床应用情况\n3. 输出格式：Word 文档 (.docx)\n4. 保存路径：/root/reports/核医药产业报告/\n5. 文件名：核医疗资料搜集报告_YYYY-MM-DD.docx（YYYY-MM-DD 为当天日期）\n6. 格式要求：三线表、学术风格、去 AI 化、带表题表注\n生成报告并保存到指定路径。",
+        "thinking": "high",
+        "timeoutSeconds": 3600
+      },
+      "delivery": {
+        "mode": "webhook",
+        "to": "https://open.feishu.cn/open-apis/bot/v2/hook/8bdf3236-6e2e-486f-a05d-b03d0baadf6f",
+        "bestEffort": true
+      },
+      "state": {
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "36be298a-cbfe-4c75-85ad-06fadb555154",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "医疗机器人资料搜集日报",
+      "enabled": true,
+      "createdAtMs": 1773304041447,
+      "updatedAtMs": 1774491198895,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "请执行医疗机器人相关资料搜集任务：\n\n【核心参考资料】\n必须参照此网页内容框架和数据：https://sps.yy-gp.com/hdaj4/i.html\n关键数据基线（用于对比追踪变化）：\n- 2025 年市场规模：345 亿元\n- 五大领域：手术 (120 亿/34.8%)、康复 (85 亿/24.6%)、服务 (65 亿/18.8%)、诊断 (45 亿/13%)、护理 (30 亿/8.7%)\n- 平均增长率：28.9%\n- 企业分布：北京 6 家、上海 5 家、成都 3 家（重点追踪）\n- 18 家代表企业：微创图迈、威高、术锐、博恩思、傅利叶、程天科技、大艾、布法罗、擎朗智能、优必选、钛米、推想医疗、深睿医疗、联影医疗、华西精创、康力优蓝、国智恒、穿山甲\n\n【搜索任务】\n1. 联网搜索关键词：\n   - 医疗机器人 2026 年最新数据\n   - 手术机器人 市场规模 2026\n   - 康复机器人 外骨骼 新进展\n   - 医疗机器人 政策 2026\n   - 博恩思 傅利叶 术锐 最新融资/产品\n   - 四川 成都 医疗机器人 产业\n\n2. 重点追踪内容：\n   - 市场规模数据变化（对比 345 亿基线）\n   - 新发布政策（对比 5 项基线政策）\n   - 18 家代表企业的新融资、新产品、新进展\n   - 技术趋势落地情况（AI 融合、5G 远程、微型化）\n   - 四川/成都企业特别追踪（博恩思、布法罗、华西精创）\n\n3. 输出格式：Word 文档 (.docx)\n4. 保存路径：/root/reports/医疗机器人/\n5. 文件名：医疗机器人资料搜集报告_YYYY-MM-DD.docx\n6. 格式要求：\n   - 三线表、学术风格、去 AI 化\n   - 带表题表注\n   - 必须有数据对比表（新旧数据对比）\n   - 标注实质性变化（如市场规模增长>10%、新政策出台、企业重大融资等）\n\n生成报告并保存到指定路径。",
+        "thinking": "high",
+        "timeoutSeconds": 3600
+      },
+      "delivery": {
+        "mode": "webhook",
+        "to": "https://open.feishu.cn/open-apis/bot/v2/hook/8bdf3236-6e2e-486f-a05d-b03d0baadf6f",
+        "bestEffort": true
+      },
+      "state": {
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "02e466d6-d7b2-494a-9a66-4309200eaea1",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "主动检查 - 心跳",
+      "enabled": true,
+      "createdAtMs": 1773643833557,
+      "updatedAtMs": 1774512829525,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 3600000,
+        "anchorMs": 1773643833557
+      },
+      "sessionTarget": "main",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "HEARTBEAT: 主动检查时间！请检查：1) 是否有紧急邮件需要处理；2) 未来 24 小时日历事件；3) 工作区 git 状态；4) 超过 4 小时未对话则主动询问周大爷是否需要帮助。有重要事情才报告，无事回复 HEARTBEAT_OK。"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "a7c3e1f0-9d52-4b8a-b6e1-3f2a8c5d7e90",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "医疗器械监管条例政策追踪",
+      "enabled": true,
+      "createdAtMs": 1774440000000,
+      "updatedAtMs": 1774440000000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * 1",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "请执行《医疗器械监督管理条例》政策变化追踪任务：\n1. 搜索关键词：医疗器械监督管理条例、医疗器械管理法、NMPA医疗器械法规\n2. 重点关注：条例修订动态、征求意见稿、配套规章更新、地方执行情况\n3. 输出格式：Word文档(.docx)\n4. 保存路径：/root/reports/政策文件追踪/\n5. 文件名：医疗器械监管条例_政策追踪_YYYY-MM-DD.docx\n6. 格式要求：三线表、学术风格、去AI化、带表题表注\n生成追踪报告并保存到指定路径。如发现实质性政策变化，请特别标注提醒。",
+        "thinking": "high",
+        "timeoutSeconds": 3600
+      },
+      "delivery": {
+        "mode": "webhook",
+        "to": "https://open.feishu.cn/open-apis/bot/v2/hook/8bdf3236-6e2e-486f-a05d-b03d0baadf6f",
+        "bestEffort": true
+      },
+      "state": {
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "medical-device-registration-tracker",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "医疗器械注册管理办法 政策追踪",
+      "enabled": true,
+      "createdAtMs": 1774440000000,
+      "updatedAtMs": 1774440000000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 10 * * 1",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "请执行《医疗器械注册与备案管理办法》政策变化追踪任务：\n1. 搜索关键词：注册与备案管理办法、审评审批改革、创新医疗器械、临床评价、分类目录\n2. 重点关注：办法修订动态、CMDE技术指导原则、注册审评改革、创新审批\n3. 输出格式：Word文档(.docx)\n4. 保存路径：/root/reports/政策文件追踪/\n5. 文件名：医疗器械注册管理办法_政策追踪_YYYY-MM-DD.docx\n6. 格式要求：三线表、学术风格、去AI化、带表题表注\n生成追踪报告并保存到指定路径。如发现实质性政策变化，请特别标注提醒。",
+        "thinking": "high",
+        "timeoutSeconds": 3600
+      },
+      "delivery": {
+        "mode": "webhook",
+        "to": "https://open.feishu.cn/open-apis/bot/v2/hook/8bdf3236-6e2e-486f-a05d-b03d0baadf6f",
+        "bestEffort": true
+      },
+      "state": {
+        "consecutiveErrors": 0
+      }
+    }
+  ]
+}
